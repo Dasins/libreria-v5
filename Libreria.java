@@ -45,4 +45,13 @@ public class Libreria {
         libros.add(new Libro(id, titulo, genero, stock));
         id++;
     }
+    
+    /**
+     * Muestra por terminal de texto todos los datos de los objetos de la coleccion.
+     */
+    public void mostrarTodos() {
+        for(Libro libro : libros) {
+            System.out.println(libro);
+        }
+    }
 }
