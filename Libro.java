@@ -4,7 +4,7 @@ import java.util.HashSet;
  * Crea objetos Libro, capaces de almacenar informacion relativa al titulo del ejemplar, el tema editorial,
  * el numero de unidades disponibles y un identificador unico.
  * 
- * @tiempo 44min
+ * @tiempo 46min
  * @author d4s1ns
  * @version 2018/02/20
  */
