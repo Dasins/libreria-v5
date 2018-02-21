@@ -150,4 +150,12 @@ public class Libro {
         }
     }
     
+    /* METODOS COMUNES */
+    /**
+     * Devuelve toda la informacion del objeto Libro como una cadena.
+     * @return Devuelve toda la informacion del objeto como una cadena.
+     */
+    public String toString() {
+        return "Titulo: " + titulo + "\tGenero: " + genero + "\tUds: " + stock;
+    }
 }
