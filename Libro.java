@@ -1,15 +1,17 @@
 import java.util.HashSet;
 
 /**
- * Crea objetos Libro, capaces de almacenar informacion relativa al titulo del ejemplar, el tema editorial
- * y el numero de unidades disponibles.
+ * Crea objetos Libro, capaces de almacenar informacion relativa al titulo del ejemplar, el tema editorial,
+ * el numero de unidades disponibles y un identificador unico.
  * 
- * @tiempo 4min
+ * @tiempo 44min
  * @author d4s1ns
  * @version 2018/02/20
  */
 public class Libro {    
     
+    // Identificador unico.
+    private int id;
     // Titulo del libro.
     private String titulo;
     // Tema editorial.
@@ -20,10 +22,12 @@ public class Libro {
     /* CONSTRUCTORES */
     /**
      * Construye objetos libro, el stock inicial es 1.
+     * @param id El identificador unico del libro.
      * @param titulo El titulo del libro.
      * @param genero El tema editorial del libro.
      */
-    public Libro(String titulo, String genero) {
+    public Libro(int id, String titulo, String genero) {
+        this.id = id;
         this.titulo = titulo.toUpperCase();
         setGenero(genero.toUpperCase());        
         stock = 1;
@@ -32,11 +36,13 @@ public class Libro {
     /**
      * Construye objetos libros con un stock determinado por parametro, 
      * si el stock indicado por parametro no es valido (numero negativo), se crea con un stock de 0.
+     * @param id El identificador unico del libro.
      * @param titulo El titulo del libro.
      * @param genero El tema editorial del libro.
      * @param stock El numero de unidades disponibles del libro.
      */
-    public Libro(String titulo, String genero, int stock) {
+    public Libro(int id, String titulo, String genero, int stock) {
+        this.id = id;
         this.titulo = titulo.toUpperCase();
         setGenero(genero.toUpperCase());
         this.stock = 0; // Linea innecesaria por clarificar, stock se inicializa por defecto a 0. 
@@ -44,6 +50,14 @@ public class Libro {
     }
     
     /* METODOS GETTER */
+    /**
+     * Devuelve el identificador unico del objeto.
+     * @return Devuelve el identificador unico del objeto.
+     */
+    public int getID() {
+        return id;
+    }
+    
     /**
      * Devuelve el titulo del libro.
      * @return Devuelve el titulo del libro.
