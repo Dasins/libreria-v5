@@ -11,7 +11,7 @@ import java.util.HashSet;
 public class Libro {    
     
     // Identificador unico.
-    private int id;
+    private Integer id;
     // Titulo del libro.
     private String titulo;
     // Autor del libro.
@@ -19,7 +19,7 @@ public class Libro {
     // Tema editorial.
     private String genero;
     // Numero de ejemplares disponibles.
-    private int stock;
+    private Integer stock;
     
     /* CONSTRUCTORES */
     /**
@@ -199,7 +199,7 @@ public class Libro {
      * @return Devuelve toda la informacion del objeto como una cadena.
      */
     public String toString() {
-        return "Titulo: " + titulo + "\tAutor: " + autor + "\tGenero: " + genero + "\tUds: " + stock;
+        return "ID: " + id + "\tTitulo: " + titulo + "\tAutor: " + autor + "\tGenero: " + genero + "\tUds: " + stock;
     }
     
     /**
@@ -213,4 +213,30 @@ public class Libro {
         }
         return coinciden;
     }
+    
+    /**
+     * 
+     */
+    public int compareTo(String atrib, Libro libro) {
+        int comparador = 0;
+        AtribLibro atributo = AtribLibro.valueOf(atrib);
+        switch(atributo) {
+            case ID:    
+                comparador = id.compareTo(libro.getID());
+                break;
+            case TITULO:
+                comparador = titulo.compareTo(libro.getTitulo());
+                break;
+            case AUTOR:
+                comparador = autor.compareTo(libro.getAutor());
+                break;
+            case GENERO:
+                comparador = genero.compareTo(libro.getGenero());
+                break;
+            case STOCK:
+                comparador = stock.compareTo(libro.getStock());
+        }
+        return comparador;
+    }
+    
 }

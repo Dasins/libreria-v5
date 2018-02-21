@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Crea objetos que simulan la base de datos de una libreria.
@@ -89,4 +90,53 @@ public class Libreria {
         }
         return index;
     }
+    
+    /**
+     * Ordena la coleccion por uno de sus atributos especificado por parametro. Si el atributo no existe, no hace nada.
+     * @param atrib El atributo por el que se quiere ordenar
+     */
+    public void ordenarPor(String atrib) {
+        atrib = atrib.toUpperCase();
+        if(validarAtributo(atrib)) {
+            int i, j;
+            for(i = 0; i < libros.size(); i++){
+                Libro menor = libros.get(i);
+                int pos = i;
+                for(j = i + 1; j < libros.size(); j++){
+                    Libro actual = libros.get(j);
+                    if(actual.compareTo(atrib, menor) <= 0){
+                        menor = actual;
+                        pos = j;
+                    }
+                }
+                if(pos != i){
+                    Libro temp = libros.get(i);
+                    libros.set(i, menor);
+                    libros.set(pos, temp);
+                }
+            }
+        }
+    }
+    
+    public boolean validarAtributo(String atrib) {
+        HashSet<String> atributos = new HashSet<>();
+        for(AtribLibro atributo : AtribLibro.values()){
+            atributos.add(atributo.name());
+        }
+        return atributos.contains(atrib);
+    }
+    
+    /*public void test() {
+        anadirLibro("Magenta","Bushido","Fantasia",2);
+        anadirLibro("Rusa-rumana","Bushido","Fantasia",2);
+        anadirLibro("L Amour","Bushido","Romantico",2);
+        anadirLibro("Te esperare","Bushido","Fantasia",4);
+        anadirLibro("Magenta","Morti","Fantasia",2);
+        anadirLibro("Magenta","Morti","Romantico",3);
+        anadirLibro("Magenta","Shuarma","Fantasia",2);
+        anadirLibro("L Amour","Shuarma","Fantasia",2);
+        anadirLibro("Blood","After Forever","Fantasia",2);
+        
+    }*/
+    
 }
