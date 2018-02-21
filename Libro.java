@@ -14,6 +14,8 @@ public class Libro {
     private int id;
     // Titulo del libro.
     private String titulo;
+    // Autor del libro.
+    private String autor;
     // Tema editorial.
     private String genero;
     // Numero de ejemplares disponibles.
@@ -24,12 +26,14 @@ public class Libro {
      * Construye objetos libro, el stock inicial es 1.
      * @param id El identificador unico del libro.
      * @param titulo El titulo del libro.
+     * @param autor El autor del libro.
      * @param genero El tema editorial del libro.
      */
-    public Libro(int id, String titulo, String genero) {
+    public Libro(int id, String titulo, String autor, String genero) {
         this.id = id;
         this.titulo = titulo.toUpperCase();
-        setGenero(genero.toUpperCase());        
+        setAutor(autor);
+        setGenero(genero);        
         stock = 1;
     }
     
@@ -38,13 +42,15 @@ public class Libro {
      * si el stock indicado por parametro no es valido (numero negativo), se crea con un stock de 0.
      * @param id El identificador unico del libro.
      * @param titulo El titulo del libro.
+     * @param autor El autor del libro.
      * @param genero El tema editorial del libro.
      * @param stock El numero de unidades disponibles del libro.
      */
-    public Libro(int id, String titulo, String genero, int stock) {
+    public Libro(int id, String titulo, String autor, String genero, int stock) {
         this.id = id;
         this.titulo = titulo.toUpperCase();
-        setGenero(genero.toUpperCase());
+        setAutor(autor);
+        setGenero(genero);
         this.stock = 0; // Linea innecesaria por clarificar, stock se inicializa por defecto a 0. 
         setStock(stock);
     }
@@ -64,6 +70,14 @@ public class Libro {
      */
     public String getTitulo() {
         return titulo;
+    }
+    
+    /**
+     * Devuelve el autor del libro.
+     * @return Devuelve el autor del libro.
+     */
+    public String getAutor() {
+        return autor;
     }
     
     /**
@@ -92,12 +106,27 @@ public class Libro {
             this.titulo = titulo.toUpperCase();
         }
     }
+    
+    /**
+     * Modifica el autor del libro.
+     * @param autor El nuevo autor para el libro.
+     */
+    public void setAutor(String autor) {
+        if(autor.length() > 0) {
+            autor = autor.toUpperCase();
+            this.autor = autor;
+        }
+        else{
+            this.autor = "ANONIMO";
+        }
+    }
         
     /**
      *  Modifica el tema editorial del libro. Si el genero elegido, no se encuentra dentro de la lista predefinidad le adjudica OTROS.
      *  @param genero El tema editorial del libro.
      */
     public void setGenero(String genero) {
+        genero = genero.toUpperCase();
         if(validarGenero(genero)){
             Genero tema = Genero.valueOf(genero);
             this.genero = genero;
@@ -107,7 +136,7 @@ public class Libro {
         }
     }
     
-        /**
+    /**
      * Comprueba si el genero introducido por parametro existe en la lista de generos predefinida.
      * @param genero El genero que vamos a comprobar si existe en la lista predefinida.
      */
@@ -170,6 +199,18 @@ public class Libro {
      * @return Devuelve toda la informacion del objeto como una cadena.
      */
     public String toString() {
-        return "Titulo: " + titulo + "\tGenero: " + genero + "\tUds: " + stock;
+        return "Titulo: " + titulo + "\tAutor: " + autor + "\tGenero: " + genero + "\tUds: " + stock;
+    }
+    
+    /**
+     * Devuelve verdadero si este Libro es igual al Libro indicado por parametro, obviando el id unico y el stock.
+     * @param libro El objeto Libro con el que estamos comparando.
+     */
+    public boolean equals(Libro libro) {
+        boolean coinciden = false;
+        if(titulo.equals(libro.getTitulo()) && genero.equals(libro.getGenero()) && autor.equals(libro.getAutor())){
+            coinciden = true;
+        }
+        return coinciden;
     }
 }
