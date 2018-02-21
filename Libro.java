@@ -1,3 +1,4 @@
+import java.util.HashSet;
 
 /**
  * Crea objetos Libro, capaces de almacenar informacion relativa al titulo del ejemplar, el tema editorial
@@ -10,11 +11,11 @@
 public class Libro {    
     
     // Titulo del libro.
-    String titulo;
+    private String titulo;
     // Tema editorial.
-    String genero;
+    private String genero;
     // Numero de ejemplares disponibles.
-    int stock;
+    private int stock;
     
     /* CONSTRUCTORES */
     /**
@@ -24,20 +25,22 @@ public class Libro {
      */
     public Libro(String titulo, String genero) {
         this.titulo = titulo.toUpperCase();
-        this.genero = genero.toUpperCase();        
+        setGenero(genero.toUpperCase());        
         stock = 1;
     }
     
     /**
-     * Construye objetos libros con un stock determinado por parametro
+     * Construye objetos libros con un stock determinado por parametro, 
+     * si el stock indicado por parametro no es valido (numero negativo), se crea con un stock de 0.
      * @param titulo El titulo del libro.
      * @param genero El tema editorial del libro.
      * @param stock El numero de unidades disponibles del libro.
      */
     public Libro(String titulo, String genero, int stock) {
         this.titulo = titulo.toUpperCase();
-        this.genero = genero.toUpperCase();        
-        this.stock = stock;
+        setGenero(genero.toUpperCase());
+        this.stock = 0; // Linea innecesaria por clarificar, stock se inicializa por defecto a 0. 
+        setStock(stock);
     }
     
     /* METODOS GETTER */
@@ -75,13 +78,31 @@ public class Libro {
             this.titulo = titulo.toUpperCase();
         }
     }
-    
+        
     /**
-     *  Modifica el tema editorial del libro.
+     *  Modifica el tema editorial del libro. Si el genero elegido, no se encuentra dentro de la lista predefinidad le adjudica OTROS.
      *  @param genero El tema editorial del libro.
      */
     public void setGenero(String genero) {
-        this.genero = genero.toUpperCase();
+        if(validarGenero(genero)){
+            Genero tema = Genero.valueOf(genero);
+            this.genero = genero;
+        }
+        else {
+            this.genero = "OTROS";
+        }
+    }
+    
+        /**
+     * Comprueba si el genero introducido por parametro existe en la lista de generos predefinida.
+     * @param genero El genero que vamos a comprobar si existe en la lista predefinida.
+     */
+    private boolean validarGenero(String genero) {
+        HashSet<String> generos = new HashSet<>();
+        for(Genero tema : Genero.values()){
+            generos.add(tema.name());
+        }
+        return generos.contains(genero);
     }
     
     /**
